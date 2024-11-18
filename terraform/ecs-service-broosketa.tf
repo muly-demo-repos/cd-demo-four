@@ -18,8 +18,8 @@ module "ecs_service_broosketa" {
       port_mappings = [
         {
           name          = "broosketa"
-          containerPort = 5202
-          hostPort      = 5202
+          containerPort = 8080
+          hostPort      = 8080
           protocol      = "tcp"
         }
       ]
@@ -45,7 +45,7 @@ module "ecs_service_broosketa" {
     service = {
       target_group_arn = element(module.ecs_alb_broosketa.target_group_arns, 0)
       container_name   = "broosketa"
-      container_port   = 5202
+      container_port   = 8080
     }
   }
 
@@ -54,8 +54,8 @@ module "ecs_service_broosketa" {
   security_group_rules = {
     alb_ingress = {
       type                     = "ingress"
-      from_port                = 5202
-      to_port                  = 5202
+      from_port                = 8080
+      to_port                  = 8080
       protocol                 = "tcp"
       source_security_group_id = module.ecs_alb_sg_broosketa.security_group_id
     }

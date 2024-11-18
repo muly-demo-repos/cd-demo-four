@@ -13,6 +13,6 @@ resource "aws_secretsmanager_secret_version" "secrets_version_broosketa" {
     BCRYPT_SALT       = "10"
     JWT_EXPIRATION    = "2d"
     JWT_SECRET_KEY    = random_password.broosketa_secret_password.result
-    DB_URL            = "postgres://${module.rds_broosketa.db_instance_username}:${random_password.broosketa_database_password.result}@${module.rds_broosketa.db_instance_address}:5432/${module.rds_broosketa.db_instance_name}"
+    DB_URL     = "Server=${module.rds_broosketa.db_instance_address};Port=5432;Database=${module.rds_broosketa.db_instance_name};User Id=${module.rds_broosketa.db_instance_username};Password=${random_password.broosketa_database_password.result};"
   })
 }
